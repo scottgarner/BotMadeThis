@@ -8,8 +8,8 @@ WORKDIR /usr/src/app/web
 # Install app dependencies
 COPY web/package*.json ./
 
-# RUN npm install
-RUN npm ci --only=production
+RUN npm install
+# RUN npm ci --only=production
 
 # Bundle app source
 COPY web/. .
@@ -24,8 +24,8 @@ WORKDIR /usr/src/app/server
 # Install app dependencies
 COPY server/package*.json ./
 
-# RUN npm install
-RUN npm ci --only=production
+RUN npm install
+# RUN npm ci --only=production
 
 # Bundle app source
 COPY server/. .
