@@ -14,7 +14,7 @@ RUN npm install
 # Bundle app source
 COPY web/. .
 
-CMD [ "npm", "run build" ]
+CMD [ "npm", "run", "build" ]
 
 # Server
 
@@ -31,4 +31,4 @@ RUN npm install
 COPY server/. .
 
 EXPOSE 8077
-CMD [ "npm", "run start" ]
+CMD [ "npm","run","start" ]
