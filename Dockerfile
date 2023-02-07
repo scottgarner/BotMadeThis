@@ -14,11 +14,9 @@ RUN npm ci --only=production
 # Bundle app source
 COPY web/. .
 
-CMD [ "npm", "build" ]
+CMD [ "npm", "run build" ]
 
 # Server
-
-EXPOSE 8077
 
 # Create app directory
 WORKDIR /usr/src/app/server
@@ -32,4 +30,5 @@ RUN npm ci --only=production
 # Bundle app source
 COPY server/. .
 
-CMD [ "npm", "start" ]
+EXPOSE 8077
+CMD [ "npm", "run start" ]
