@@ -1,6 +1,6 @@
 import tmi from "tmi.js";
 import dotenv from "dotenv";
-import { WebSocketEndpoint } from "./websocketEndPoint";
+import { WebSocketEndpoint } from "./websocketEndpoint";
 
 dotenv.config();
 
