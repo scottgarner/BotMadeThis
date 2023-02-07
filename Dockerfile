@@ -14,7 +14,7 @@ RUN npm install
 # Bundle app source
 COPY web/. .
 
-CMD [ "npm", "run", "build" ]
+RUN npm run build
 
 # Server
 
