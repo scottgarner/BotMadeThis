@@ -7,3 +7,4 @@ services:
     env_file: ./stack.env
     restart: always
     network_mode: host
+    tty: true
