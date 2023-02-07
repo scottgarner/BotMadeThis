@@ -5,7 +5,7 @@
   "main": "dist/app.ts",
   "scripts": {
     "build:watch": "esbuild src/app.ts --bundle --minify  --outdir=dist --watch",
-    "build": "cp ./index.html dist && esbuild src/app.ts --bundle --minify --outdir=dist"
+    "build": "cp ./index.html ./dist && esbuild src/app.ts --bundle --minify --outdir=dist"
   },
   "author": "",
   "license": "ISC",
