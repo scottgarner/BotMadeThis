@@ -85,6 +85,7 @@ class ChatBot {
             if (messageData.type == "chat") {
                 let userstate = messageData.userstate;
                 let message = messageData.message;
+
                 // Commands.
                 if (message.length > 0) {
                     let messageArray = message.split(" ");
@@ -94,6 +95,17 @@ class ChatBot {
                         chatCommand(userstate, message);
                     }
                 }
+
+                // Credits.
+                {
+                    const displayName = messageData.userstate["display-name"];
+                    let messageCount = 1;
+                    if (this.credits.has(displayName)) {
+                        messageCount = this.credits.get(displayName);
+                        messageCount++;
+                    }
+                    this.credits.set(displayName, messageCount);
+                }
             }
 
             if (messageData.type == "channel.update") {
@@ -101,19 +113,7 @@ class ChatBot {
                 Messages.enqueue(messageBody);
             };
 
-            // Credits.
-            {
-                const displayName = messageData.userstate["display-name"];
-                let messageCount = 1;
-                if (this.credits.has(displayName)) {
-                    messageCount = this.credits.get(displayName);
-                    messageCount++;
-                }
-                this.credits.set(displayName, messageCount);
-            }
-
         }
-
     }
 }
 export default ChatBot;
