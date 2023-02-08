@@ -70,7 +70,8 @@ class ChatBot {
             }
         )
 
-        this.ws = new WebSocket("ws://localhost:8077");
+        let hostname = window.location.hostname;
+        this.ws = new WebSocket("ws://" + hostname + ":8077");
 
         this.ws.onopen = () => {
             console.log("OPEN");
