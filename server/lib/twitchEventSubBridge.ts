@@ -46,7 +46,7 @@ export class TwitchEventSubBridge extends EventEmitter {
 
         this.ws.addEventListener("close", (e) => {
             this.ws = null;
-            setTimeout(this.connect, 1000);
+            setTimeout(this.connect.bind(this), 1000);
         });
     }
 
