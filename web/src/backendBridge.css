@@ -1,0 +1,19 @@
+      #indicator {
+          position: fixed;
+          top: 8px;
+          right: 8px;
+          width: 8px;
+          height: 8px;
+          border-radius: 4px;
+          background: red;
+      }
+
+      #indicator.connected {
+          background: lime;
+      }
+
+      #fontLoader {
+          position: absolute;
+          font-family: "Lato", sans-serif;
+          opacity: 0;
+      }

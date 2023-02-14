@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Stand-By</title>
+
+    <style>
+        body,
+        html {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #main {
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div id="main"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/5.0.0-rc.2/pixi.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pixi-filters@2.7.1/dist/pixi-filters.js"></script>
+
+    <script>
+
+        (function () {
+
+
+            let mainDiv = document.getElementById('main');
+
+            app = new PIXI.Application({
+                width: 1920,
+                height: 1080,
+                resizeTo: mainDiv,
+                autoDensity: true,
+                resolution: devicePixelRatio,
+            });
+            document.getElementById('main').appendChild(app.view);
+
+            var background = PIXI.Sprite.from("images/standby.png");
+            background.width = app.screen.width;
+            background.height = app.screen.height;
+
+            let adjustmentFilter = new PIXI.filters.AdjustmentFilter();
+            adjustmentFilter.red = .95;
+            adjustmentFilter.brightness = 1.5;
+            adjustmentFilter.contrast = .25;
+
+            let blurFilter = new PIXI.filters.BlurFilter();
+            blurFilter.blur = 2;
+
+            let bloomFilter = new PIXI.filters.AdvancedBloomFilter();
+            bloomFilter.threshold = 1.15;
+            bloomFilter.blur = 8;
+
+            let rgbFilter = new PIXI.filters.RGBSplitFilter();
+            rgbFilter.red.x = 1;
+            rgbFilter.red.y = -1;
+            rgbFilter.blue.x = 1;
+            rgbFilter.blue.y = -1;
+            rgbFilter.green.x = -2;
+            rgbFilter.green.y = 2;
+
+            let crtFilter = new PIXI.filters.CRTFilter();
+            crtFilter.curvature = 12.0;
+            crtFilter.lineWidth = 3;
+            crtFilter.lineContrast = .1;
+            crtFilter.verticalLine = false;
+            crtFilter.noise = .1;
+            crtFilter.noiseSize = 1.5;
+            crtFilter.seed = 100;
+            crtFilter.vignetting = .15;
+            crtFilter.vignettingAlpha = 1.0;
+            crtFilter.vignettingBlur = 0.5;
+
+            background.filters = [adjustmentFilter, bloomFilter, rgbFilter, crtFilter, blurFilter];
+            app.stage.addChild(background);
+
+            let clock = 0;
+            app.ticker.add(function (delta) {
+                crtFilter.time = clock / 5;
+                crtFilter.seed = clock;
+                clock += delta;
+            });
+
+            //
+
+            window.addEventListener('resize', function () {
+                background.width = app.screen.width;
+                background.height = app.screen.height;
+            });
+
+        })();
+
+
+    </script>
+
+
+</body>
+
+</html>
