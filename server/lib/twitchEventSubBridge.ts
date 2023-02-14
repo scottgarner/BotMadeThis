@@ -25,8 +25,8 @@ export class TwitchEventSubBridge extends EventEmitter {
             console.log("Connected to EventSub.");
         };
 
-        this.ws.onmessage = async (e) => {
-            let data = JSON.parse(e.data);
+        this.ws.onmessage = async (e: WebSocket.MessageEvent) => {
+            let data = JSON.parse(e.data as string);
 
             if (data.metadata.message_type == "notification") {
                 const type = data.metadata.subscription_type;

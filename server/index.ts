@@ -21,9 +21,6 @@ const twitchChatBridge = new TwitchChatBridge(endpoint);
 // Twitch EventSub Bridge
 import { TwitchEventSubBridge } from "./lib/twitchEventSubBridge";
 const twitchEventSubBridge = new TwitchEventSubBridge(endpoint);
-twitchEventSubBridge.on("stream.online", (data) => {
-    console.log("Stream Up!");
-});
 
 // Stupid auth stuff. I hate it.
 let scope = ("chat:read chat:edit moderator:read:followers");
@@ -36,3 +33,19 @@ url.searchParams.append("scope", scope);
 url.searchParams.append("state", "xxx");
 
 console.log(url.toString());
+
+// Discord
+import { DiscordBridge } from './lib/discordBridge';
+const discordBridge = new DiscordBridge();
+
+// Linking modules.
+
+twitchEventSubBridge.on("stream.online", (data) => {
+    console.log("Stream Up!");
+    discordBridge.say("@here Stream is now online: https://twitch.tv/scottmadethis")
+});
+
+twitchEventSubBridge.on("stream.offline", (data) => {
+    console.log("Stream offline!");
+    discordBridge.say("Stream is now offline.")
+});
